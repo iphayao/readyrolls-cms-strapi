@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: readyrolls-cms
+  labels:
+    app: readyrolls-cms
+spec:
+  selector:
+    app: readyrolls-cms
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      name: http-traffic
+      port: 80
+      targetPort: 1337
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: readyrolls-cms
+spec:
+  selector:
+    matchLabels:
+      app: readyrolls-cms
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: readyrolls-cms
+    spec:
+      hostAliases:
+        - ip: "192.168.1.64"
+          hostnames:
+            - "auth.digitalready.io"
+      containers:
+        - name: readyrolls-cms
+          image: localhost:32000/readyrolls-cms:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 1337
+          resources:
+            requests:
+              memory: "250Mi"
+              cpu: "50m"
