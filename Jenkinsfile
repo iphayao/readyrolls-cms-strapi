@@ -8,14 +8,14 @@ pipeline {
         stage('Build Image') {
             steps {
                 container('docker') {
-                    sh 'docker build -t localhost:32000/readyrolls-cms .'
+                    sh 'docker build -t localhost:32000/strapi .'
                 }
             }
         }
         stage('Push Image') {
             steps {
                 container('docker') {
-                     sh 'docker push localhost:32000/readyrolls-cms'
+                     sh 'docker push localhost:32000/strapi'
                 }
             }
         }

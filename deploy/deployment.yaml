@@ -1,49 +1,47 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: readyrolls-cms
+  name: strapi-service
+  namespace: strapi
   labels:
-    app: readyrolls-cms
+    app: strapi-service
 spec:
   selector:
-    app: readyrolls-cms
+    app: strapi-service
   type: ClusterIP
   ports:
     - protocol: TCP
       name: http-traffic
-      port: 80
+      port: 1337
       targetPort: 1337
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: readyrolls-cms
+  name: strapi-deployment
+  namespace: strapi
 spec:
   selector:
     matchLabels:
-      app: readyrolls-cms
+      app: strapi-deployment
   replicas: 1
   template:
     metadata:
       labels:
-        app: readyrolls-cms
+        app: strapi-deployment
     spec:
       hostAliases:
         - ip: "192.168.1.64"
           hostnames:
             - "auth.digitalready.io"
       containers:
-        - name: readyrolls-cms
-          image: localhost:32000/readyrolls-cms:latest
+        - name: strapi
+          image: localhost:32000/strapi:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 1337
-          resources:
-            requests:
-              memory: "250Mi"
-              cpu: "50m"
           envFrom:
             - configMapRef:
-                name: readyrolls-cms-conf
+                name: strapi-config-map
             - secretRef:
-                name: readyrolls-cms-secret
+                name: strapi-secret

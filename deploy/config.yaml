@@ -6,7 +6,7 @@ data:
   HOST: 0.0.0.0
   PORT: "1337"
   NODE_ENV: development
-  
+  DATABASE_CLIENT: postgres
   # we'll explain the db host later
   DATABASE_HOST: strapi-db
   DATABASE_PORT: "31064"
