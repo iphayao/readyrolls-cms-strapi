@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: readyrolls-cms-conf
+data:
+  HOST: 0.0.0.0
+  PORT: "1337"
+  NODE_ENV: development
+  
+  # we'll explain the db host later
+  DATABASE_HOST: strapi-db
+  DATABASE_PORT: "31064"
+  DATABASE_USERNAME: postgres
+  DATABASE_NAME: P@ssw0rd
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: readyrolls-cms-secret
+type: Opaque
+data:
+  # use the proper values in here
+  APP_KEYS: TkBrb3Juc2F3YW4yMzk=
+  API_TOKEN_SALT: cmVhZHlyb2xscy1zdHJhcGk=
+  ADMIN_JWT_SECRET: NjdAUGlzYWxlZQ==
+  JWT_SECRET: NjdAUGlzYWxlZQ==
+  # please NEVER use these passwords, always use strong passwords
+  DATABASE_PASSWORD: UEBzc3cwcmQ= # echo -n strapi-password | base64

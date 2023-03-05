@@ -42,3 +42,8 @@ spec:
             requests:
               memory: "250Mi"
               cpu: "50m"
+          envFrom:
+            - configMapRef:
+                name: readyrolls-cms-conf
+            - secretRef:
+                name: readyrolls-cms-secret
