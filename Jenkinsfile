@@ -22,8 +22,8 @@ pipeline {
         stage('Deployment') {
             steps {
                 container('kubectl') {
-                     sh 'kubectl delete -f deploy/deployment.yaml -n default --ignore-not-found=true'
-                     sh 'kubectl apply -f deploy/deployment.yaml -n default'
+                     sh 'kubectl delete -f deploy/deployment.yaml -n strapi --ignore-not-found=true'
+                     sh 'kubectl apply -f deploy/deployment.yaml -n strapi'
                 }
             }
         }
