@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: readyrolls-cms-conf
+  name: strapi-config-map
 data:
   HOST: 0.0.0.0
   PORT: "1337"
@@ -16,7 +16,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: readyrolls-cms-secret
+  name: strapi-secret
 type: Opaque
 data:
   # use the proper values in here
